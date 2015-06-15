@@ -10,6 +10,3 @@ Implement your own version of Rock, Paper, Scissor. Try and go top down and use 
 - Rock beats Scissors
 - Paper beats Rock
 - Scissors beats Paper
-
-
-
