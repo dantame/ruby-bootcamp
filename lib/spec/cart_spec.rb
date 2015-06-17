@@ -14,18 +14,18 @@ describe Cart do
 		items = ['orange', 'apple']
 		subject.add_items!(*items)
 
-		expect(subject.items).to eq(items)
+		expect(subject).to eq(items)
 	end
 
 	it 'removes items from the cart' do
 		items = ['orange', 'orange', 'orange']
 		subject.add_items!(*items)
 
-		expect(subject.items).to eq(items)
+		expect(subject).to eq(items)
 
 		subject.remove_items!('orange','orange')
 
-		expect(subject.items).to eq(['orange'])
+		expect(subject).to eq(['orange'])
 	end
 
 
