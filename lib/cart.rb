@@ -19,7 +19,7 @@ class Cart
 	def total
 		@items.inject(0) do |sum, item|
 			sum += @prices[item] if @prices.key?(item)
-			sum.round(2)
+			sum
 		end
 	end
 end

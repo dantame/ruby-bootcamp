@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class Prices < Hash
 	def initialize input
 		super
@@ -13,6 +15,6 @@ class Prices < Hash
 	private
 
 	def convert_to_price string_price
-		string_price.delete('.').to_f / 100
+		BigDecimal.new(string_price.delete('.')) / 100
 	end
 end
