@@ -1,34 +1,35 @@
-class Cart < Array
+class Cart
 	attr_reader :items
 	attr_reader :total
 
 	def initialize prices
 		@prices = prices
+		@items = []
 		@total = 0
 	end
 
 	def add_items! *items
-		self.push *items
+		@items.push *items
 
 		@total = calculate_total
 
-		return self
+		return @items
 	end
 
 	def remove_items! *items
 		items.each do |item|
-			self.delete_at self.index(item)
+			@items.delete_at @items.index(item)
 		end
 
 		@total = calculate_total
 
-		return self
+		return @items
 	end
 
 	private
 
 	def calculate_total
-		self.inject(0) do |sum, item|
+		@items.inject(0) do |sum, item|
 			sum += @prices[item] if @prices.key?(item)
 			sum
 		end
