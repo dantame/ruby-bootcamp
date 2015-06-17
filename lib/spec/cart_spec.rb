@@ -28,12 +28,26 @@ describe Cart do
 		expect(subject.items).to eq(['orange'])
 	end
 
-	it 'calculates a total for all items in the cart' do
-		expect(subject.total).to eq(0)
 
-		subject.add_items!('orange', 'apple')
+	context 'the list of items contains items that all have prices' do
+		it 'calculates a total for all items in the cart' do
+			expect(subject.total).to eq(0)
 
-		expect(subject.total).to eq(0.30)
+			subject.add_items!('orange', 'apple')
+
+			expect(subject.total).to eq(0.30)
+		end
 	end
+
+	context 'the list of items contains an item with no price' do
+		it 'doesnt calculate invalid items in the total' do
+			expect(subject.total).to eq(0)
+
+			subject.add_items!('orange', 'orangutan', 'apple')
+
+			expect(subject.total).to eq(0.30)
+		end
+	end
+
 
 end
