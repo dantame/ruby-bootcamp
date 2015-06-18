@@ -17,4 +17,4 @@ Create sensible modules and the corresponding tests for them and the person and 
 
 ### Extra credit
 - Find an efficient way to check that the module is in use
-- Both Person and Robot behave like walking talking things. Maybe shared examples could bring some benefit here? [Shared examples](https://www.relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples). 
+- Both Person and Robot behave like walking talking things. Maybe shared examples could bring some benefit here? [Shared examples](https://www.relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples).
