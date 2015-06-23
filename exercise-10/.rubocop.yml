@@ -1,0 +1,9 @@
+Style/Encoding:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 99
+
+Style/Documentation:
+  Exclude:
+    - 'spec/ruby_bootcap/exercise_10/split_set_spec.rb'

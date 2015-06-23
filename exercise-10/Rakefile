@@ -1,0 +1,17 @@
+task default: ['exercise10:run_tests', 'exercise10:format_code']
+
+namespace :exercise10 do
+  task :run_tests do
+    `rspec`
+  end
+
+  task :format_code do
+    `rubocop -a`
+  end
+
+  task :list, [:path, :glob] do |t, args|
+  	args.with_defaults(:glob => '*.*')
+  	files = `ls #{args['path']}#{args['glob']}`
+  	puts files
+  end
+end
