@@ -1,40 +1,5 @@
-# Load rubocop rake tasks to use in our Rakefile
-begin 
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
-rescue LoadError
-end
+require 'rake'
 
-# Create a RSpec rake task to run the tests with supplied options
-begin
-  require 'rspec/core/rake_task'
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.rspec_opts = '--color --format doc'
-  end
-rescue LoadError
-end
+Rake.add_rakelib 'rakelib/*'
 
 task default: ['exercise10:run_tests', 'exercise10:format_code']
-
-namespace :exercise10 do
-  desc 'Runs all unit tests using rspec'
-  task :run_tests => [:spec] do
-    # `rspec`
-  end
-
-  desc 'Automatically corrects linting issues using rubocop and reports outstanding issues'
-  task :format_code => ['rubocop:auto_correct', 'rubocop'] do
-    # `rubocop -a`
-  end
-
-  desc 'Lists files in a directory, optionally you can pass a glob to filter by in the format *.ext'
-  task :list, [:path, :glob] do |t, args|
-    args.with_defaults(glob: '*.*')
-
-    Dir.chdir(args[:path]) do
-      puts Rake::FileList.new(args[:glob])
-    end
-
-    # puts `ls #{args['path']}#{args['glob']}`
-  end
-end

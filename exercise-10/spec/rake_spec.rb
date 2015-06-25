@@ -1,45 +1,32 @@
 require 'rake'
-
 describe 'Rakefile' do
+
+  include_context :temporary_files
 
   before do
     Rake.application = Rake::Application.new
     Rake.application.init
-    Rake.application.load_rakefile
+    Rake.application.add_import 'rakelib/exercise10/list.rake'
+    Rake.application.load_imports
   end
 
   context 'List' do
 
-    it 'lists files in a directory with the default glob' do
-msg =<<LIST
-csv_file1.csv
-csv_file2.csv
-csv_file3.csv
-csv_file4.csv
-csv_file5.csv
-image1.jpg
-image2.jpg
-image3.jpg
-image4.jpg
-image5.jpg
-text_file1.txt
-text_file2.txt
-text_file3.txt
-LIST
+    let (:csv_file) { 'csv1.csv' }
+    let (:files) { %W(#{csv_file} image1.jpg text_file1.txt) }
 
-      expect{Rake.application["exercise10:list"].invoke('resources/')}.to output(msg).to_stdout
+    before :each do
+      files.each {|f|touch_file f}
+    end
+
+    it 'lists files in a directory with the default glob' do
+      expected_output = "#{files.join("\n")}\n"
+      expect { Rake.application["exercise10:list"].invoke(scratch_dir) }.to output(expected_output).to_stdout
     end
 
     it 'lists files in a directory filtered by the *.csv glob' do
-msg =<<LIST
-csv_file1.csv
-csv_file2.csv
-csv_file3.csv
-csv_file4.csv
-csv_file5.csv
-LIST
-
-      expect{Rake.application["exercise10:list"].invoke('resources/', '*.csv')}.to output(msg).to_stdout
+      expected_output = "#{csv_file}\n"
+      expect { Rake.application["exercise10:list"].invoke(scratch_dir, '*.csv') }.to output(expected_output).to_stdout
     end
   end
 end
